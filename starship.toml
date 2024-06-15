@@ -1,0 +1,200 @@
+add_newline = false
+command_timeout = 1000
+
+format = """
+$os\
+$hostname\
+$username\
+$sudo\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$git_metrics\
+$fill\
+$docker_context\
+$rust\
+$golang\
+$python\
+$nodejs\
+$dotnet\
+$cmd_duration $jobs $time\
+"""
+
+
+[os]
+format = '[$symbol](bold bright-white)  '
+disabled = false
+
+[os.symbols]
+Windows = ''
+Arch = '󰣇'
+Ubuntu = ''
+Macos = '󰀵'
+
+[username]
+style_user = 'white bold'
+style_root = 'black bold'
+format = '[.$user]($style) '
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[$hostname](bold bright-black)'
+disabled = false
+
+[docker_context]
+format = '[$symbol ($version )]($style)'
+
+[rust]
+symbol = ""
+format = '[$symbol ($version )]($style)'
+
+[golang]
+symbol = ""
+format = '[$symbol ($version )]($style)'
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[nodejs]
+symbol = ""
+format = "[$symbol ($version )]($style)"
+
+[dotnet]
+format = '[$symbol ($version )(🎯 $tfm )]($style)'
+
+[fill]
+symbol = " "
+
+[sudo]
+format = "[$symbol]($style)"
+style = "italic bright-purple"
+symbol = "◇┈"
+disabled = false
+
+[directory]
+truncation_length = 1
+truncation_symbol = '…/'
+# home_symbol = '󰋜 ~'
+read_only_style = '197'
+read_only = '  '
+format = '[󰋜 ~ $path]($style)[$read_only]($read_only_style) '
+
+[character]
+success_symbol = "[❯](bold bright-green)"
+# success_symbol = "[ ⤷](bold bright-white)"
+# success_symbol = "[ ↬](bold bright-white)"
+error_symbol = "[❯](bold bright-red)"
+# error_symbol = "[ ↳](bold bright-red)"
+# success_symbol = ' '
+# error_symbol = ' '
+vimcmd_symbol = "[<](bold green)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+
+[jobs]
+symbol = ""
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[git_status]
+format = '([ \( $all_status$ahead_behind\)]($style) )'
+style = 'bold cyan'
+conflicted = '[ ${count}](red) '                            # confliced
+up_to_date = '[󰘽](green) '                                   # up-to-date
+untracked = '[󰋗 ${count}](red) '                             # untracked
+ahead = ' ahead=${count}'
+diverged = ' ahead=${ahead_count}  behind=${behind_count}'
+behind = ' behind=${count}'
+stashed = '[ stashed=${count}](green) '
+modified = '[󰛿 ${count}](yellow) '                           # modified
+staged = '[󰐗 staged=${count}](green) '
+renamed = '[󱍸 renamed=${count}](yellow) '
+deleted = '[󰍶 deleted=${count}](red) '
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_metrics]
+disabled = false
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
+
+[memory_usage]
+symbol = " "
+
+[time]
+disabled = false
+style = "bold bright-yellow"
+format = "[ $time ]($style)"
+
+[custom.stunnel]
+when = "ps aux | grep stunnel | grep -v grep"
+command = "ps -o etime= -p $(ps aux | grep stunnel | grep -v grep | awk '{print $2}')"
+style = "red"
+format = "[TUNNEL OPEN for $output]($style)"
+
+
+# # ~/.config/starship.toml
+
+# format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$fill$time"""
+
+# add_newline = false
+# command_timeout = 1000
+# # Drop ugly default prompt characters
+# [character]
+# success_symbol = ''
+# error_symbol = ''
+
+# # ---
+
+# [os]
+# format = '[$symbol](bold white) '
+# disabled = false
+
+# [os.symbols]
+# Windows = ' '
+# Arch = '󰣇'
+# Ubuntu = ''
+# Macos = '󰀵'
+
+# # ---y
+
+# # Shows the username
+# [username]
+# style_user = 'white bold'
+# style_root = 'black bold'
+# format = '[$user]($style) '
+# disabled = false
+# show_always = true
+
+# # Shows the hostname
+# [hostname]
+# ssh_only = false
+# format = 'on [$hostname](bold yellow) '
+# disabled = false
+
+# # Shows current directory
+# [directory]
+# truncation_length = 1
+# truncation_symbol = '…/'
+# home_symbol = '󰋜 ~'
+# read_only_style = '197'
+# read_only = '  '
+# format = 'at [$path]($style)[$read_only]($read_only_style) '
+
+# # Shows current git branch
+# [git_branch]
+# symbol = ' '
+# format = 'via [$symbol$branch]($style)'
+# # truncation_length = 4
+# truncation_symbol = '…/'
+# style = 'bold green'
